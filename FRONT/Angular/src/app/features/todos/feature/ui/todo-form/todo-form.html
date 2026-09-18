@@ -1,0 +1,19 @@
+<form class="mb-4 flex flex-wrap items-start gap-2" (submit)="submit($event)">
+  <div class="flex flex-1 basis-48 flex-col gap-1">
+    <input
+      hlmInput
+      type="text"
+      [formControl]="title"
+      placeholder="Nouvelle tâche…"
+      aria-label="Titre de la nouvelle tâche"
+      maxlength="200"
+      class="w-full"
+    />
+
+    @if (title.invalid && title.touched) {
+      <p class="text-sm text-destructive">Le titre est requis (200 caractères maximum).</p>
+    }
+  </div>
+
+  <button hlmBtn type="submit">Ajouter</button>
+</form>

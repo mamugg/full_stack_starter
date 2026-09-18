@@ -1,0 +1,31 @@
+<section class="mx-auto max-w-xl px-4 py-8">
+  <a routerLink="/posts" class="mb-4 inline-block text-sm hover:underline">&larr; Retour aux articles</a>
+
+  @if (postWithComments.error()) {
+    <app-error-alert message="Impossible de charger cet article (route protégée : vérifiez que vous êtes connecté)." />
+  } @else if (postWithComments.isLoading()) {
+    <app-loading-spinner label="Chargement de l'article…" />
+  } @else if (postWithComments.value(); as data) {
+    <article hlmCard class="mb-6">
+      <div hlmCardHeader>
+        <h1 hlmCardTitle class="text-xl">{{ data.post.title }}</h1>
+      </div>
+      <div hlmCardContent>
+        <p>{{ data.post.body }}</p>
+      </div>
+    </article>
+
+    <h2 class="mb-3 text-lg font-semibold">Commentaires ({{ data.comments.length }})</h2>
+    <ul class="flex flex-col gap-3">
+      @for (comment of data.comments; track comment.id) {
+        <li hlmCard>
+          <div hlmCardContent>
+            <strong>{{ comment.name }}</strong>
+            <span class="ml-2 text-sm text-muted-foreground">{{ comment.email }}</span>
+            <p class="mt-1">{{ comment.body }}</p>
+          </div>
+        </li>
+      }
+    </ul>
+  }
+</section>

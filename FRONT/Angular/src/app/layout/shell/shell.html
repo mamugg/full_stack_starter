@@ -1,0 +1,23 @@
+<div class="shell">
+  <header class="shell__header">
+    <span class="shell__brand">Full Stack Starter</span>
+
+    <nav class="shell__nav">
+      <a routerLink="/todos" routerLinkActive="is-active">Tâches</a>
+      <a routerLink="/posts" routerLinkActive="is-active">Articles</a>
+    </nav>
+
+    <div class="shell__account">
+      @if (authService.user(); as user) {
+        <span>{{ user.username }} ({{ user.role }})</span>
+        <button hlmBtn variant="outline" size="sm" type="button" (click)="logout()">Déconnexion</button>
+      } @else {
+        <a routerLink="/login">Connexion</a>
+      }
+    </div>
+  </header>
+
+  <main class="shell__content">
+    <router-outlet />
+  </main>
+</div>

@@ -1,0 +1,18 @@
+<li class="flex items-center justify-between gap-4 border-b border-border py-2.5 last:border-b-0">
+  <label class="flex cursor-pointer items-center gap-2.5">
+    <input
+      type="checkbox"
+      class="size-4 rounded border-input accent-primary"
+      [checked]="todo().isDone"
+      (change)="toggled.emit(todo())"
+      [attr.aria-label]="'Marquer ' + todo().title + ' comme ' + (todo().isDone ? 'à faire' : 'terminée')"
+    />
+    <span [class.line-through]="todo().isDone" [class.text-muted-foreground]="todo().isDone">
+      {{ todo().title }}
+    </span>
+  </label>
+
+  <button hlmBtn variant="ghost" size="sm" class="text-destructive" (click)="removed.emit(todo().id)" aria-label="Supprimer">
+    Supprimer
+  </button>
+</li>

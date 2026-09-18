@@ -1,0 +1,30 @@
+<div class="flex min-h-[calc(100vh-4rem)] items-center justify-center p-4">
+  <div hlmCard class="w-full max-w-sm">
+    <div hlmCardHeader>
+      <h1 hlmCardTitle>Connexion</h1>
+      <p hlmCardDescription>Comptes de démo : <code>admin / Admin123!</code> ou <code>user / User123!</code></p>
+    </div>
+
+    <div hlmCardContent>
+      @if (errorMessage(); as message) {
+        <app-error-alert [message]="message" />
+      }
+
+      <form [formGroup]="form" (ngSubmit)="submit()" class="flex flex-col gap-4">
+        <div class="flex flex-col gap-1.5">
+          <label hlmLabel for="username">Utilisateur</label>
+          <input hlmInput id="username" type="text" formControlName="username" autocomplete="username" />
+        </div>
+
+        <div class="flex flex-col gap-1.5">
+          <label hlmLabel for="password">Mot de passe</label>
+          <input hlmInput id="password" type="password" formControlName="password" autocomplete="current-password" />
+        </div>
+
+        <button hlmBtn type="submit" [disabled]="submitting()" class="w-full">
+          {{ submitting() ? 'Connexion…' : 'Se connecter' }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

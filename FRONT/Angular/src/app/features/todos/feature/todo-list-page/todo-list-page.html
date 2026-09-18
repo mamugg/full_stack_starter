@@ -1,0 +1,28 @@
+<section class="mx-auto max-w-xl px-4 py-8">
+  <header class="mb-6">
+    <h1 class="text-2xl font-semibold">Mes tâches</h1>
+    <p class="mt-1 text-muted-foreground">
+      {{ todoStore.remainingCount() }} tâche(s) restante(s) sur {{ todoStore.todos().length }}
+    </p>
+  </header>
+
+  <app-todo-form (created)="onCreate($event)" />
+
+  @if (todoStore.error(); as error) {
+    <app-error-alert [message]="error" />
+  }
+
+  @if (todoStore.loading()) {
+    <app-loading-spinner label="Chargement des tâches…" />
+  } @else if (todoStore.todos().length === 0) {
+    <p class="text-muted-foreground">Aucune tâche pour le moment — ajoutez-en une ci-dessus.</p>
+  } @else {
+    <div hlmCard>
+      <ul hlmCardContent>
+        @for (todo of todoStore.todos(); track todo.id) {
+          <app-todo-item [todo]="todo" (toggled)="onToggle($event)" (removed)="onRemove($event)" />
+        }
+      </ul>
+    </div>
+  }
+</section>

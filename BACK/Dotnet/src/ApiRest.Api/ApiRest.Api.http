@@ -1,0 +1,60 @@
+@ApiRest.Api_HostAddress = http://localhost:5259
+
+### Login (récupère un token JWT) - compte admin
+POST {{ApiRest.Api_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "Admin123!"
+}
+
+### Login - compte user
+POST {{ApiRest.Api_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "user",
+  "password": "User123!"
+}
+
+### Route protégée : vérifier le token (remplacer TOKEN_ICI par le token reçu au login)
+GET {{ApiRest.Api_HostAddress}}/api/auth/me
+Authorization: Bearer TOKEN_ICI
+
+### Todos - liste (protégé)
+GET {{ApiRest.Api_HostAddress}}/api/todoitems
+Authorization: Bearer TOKEN_ICI
+
+### Todos - création (protégé)
+POST {{ApiRest.Api_HostAddress}}/api/todoitems
+Authorization: Bearer TOKEN_ICI
+Content-Type: application/json
+
+{
+  "title": "Nouvelle tâche"
+}
+
+### Todos - mise à jour (protégé)
+PUT {{ApiRest.Api_HostAddress}}/api/todoitems/1
+Authorization: Bearer TOKEN_ICI
+Content-Type: application/json
+
+{
+  "title": "Tâche modifiée",
+  "isDone": true
+}
+
+### Todos - suppression (protégé)
+DELETE {{ApiRest.Api_HostAddress}}/api/todoitems/1
+Authorization: Bearer TOKEN_ICI
+
+### External - liste des posts publics (JSONPlaceholder), non protégé
+GET {{ApiRest.Api_HostAddress}}/api/external/posts?userId=1
+
+### External - détail d'un post public
+GET {{ApiRest.Api_HostAddress}}/api/external/posts/1
+
+### External - post + commentaires (protégé, combine auth + appel externe)
+GET {{ApiRest.Api_HostAddress}}/api/external/posts/1/with-comments
+Authorization: Bearer TOKEN_ICI

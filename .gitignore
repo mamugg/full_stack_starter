@@ -1,0 +1,19 @@
+# Filet de securite au niveau racine du monorepo (BACK/Dotnet, BACK/Nest et
+# FRONT/Angular ont chacun leur propre .gitignore plus specifique).
+
+.DS_Store
+Thumbs.db
+
+.idea/
+.vscode/
+*.user
+*.suo
+
+node_modules/
+dist/
+bin/
+obj/
+
+.env
+.env.local
+*.local
